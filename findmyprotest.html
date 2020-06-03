@@ -1,0 +1,59 @@
+<html>
+	<head>
+	<style>
+		.ol {
+			display: block;
+		}
+	</style>
+	<script>
+		let blmt = "blm OR blacklivesmatter";
+		let pt = "protest OR protestors OR protesting"; 
+		let rt = "riot OR rioters OR rioting";
+		let leot = "cop OR police OR law enforcement";
+		let twitter = "https://twitter.com/search?f=live&";
+		let hasprev = false;
+		function directToTwitter() {
+			if (document.getElementById("nearyou").checked){
+				twitter+="lf=on&";
+			}
+			let query = "q="+ document.getElementById("city").value+" (";
+			if (document.getElementById("BLMT").checked){
+				query+=blmt;
+				hasprev = true;
+			}
+			if (document.getElementById("PT").checked){
+				if(hasprev){
+				query+=" OR ";
+				}
+				query+=pt;
+				hasprev = true;
+			}
+			if (document.getElementById("RT").checked){
+				if(hasprev){
+				query+=" OR ";
+				}
+				query+=rt;
+				hasprev = true;
+			}
+			if (document.getElementById("LEOT").checked){
+				if(hasprev){
+				query+=" OR ";
+				}
+				query+=leot;
+				hasprev = true;
+			}
+			window.location = twitter+query+")";
+		}
+	</script>
+	</head>
+	<body>
+		<textarea id="city" rows="1" style="resize:none" cols="50" placeholder="Location"></textarea>
+		<div class="ol"> <input type="checkbox" id="nearbyarea"><label for="nearbyarea">Show nearby areas (not implemented)</label></div>
+		<div class="ol"><input type="checkbox" id="nearyou"><label for="nearyou">Limit to tweeters near you</label></div>
+		<div class="ol"><input type="checkbox" id="BLMT"><label for="vehicle1">Black Lives Matter terms</label></div>
+		<div class="ol"><input type="checkbox" id="PT"><label for="vehicle1">Protest terms</label></div>
+		<div class="ol"><input type="checkbox" id="RT"><label for="vehicle1">Riot terms</label></div>
+		<div class="ol"><input type="checkbox" id="LEOT"><label for="vehicle1">Law Enforcement terms</label></div>
+		<button onclick="directToTwitter()">Find My Protest</button>
+	</body>
+</html>
