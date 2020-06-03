@@ -1,8 +1,13 @@
 <html>
 	<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<style>
 		.ol {
 			display: block;
+		}
+		
+		body {
+			background-color: #dfaee6;
 		}
 	</style>
 	<script>
@@ -47,6 +52,7 @@
 	</script>
 	</head>
 	<body>
+		<p>This will search twitter with the types of keywords you check to help you find the protests in your city</p>
 		<textarea id="city" rows="1" style="resize:none" cols="50" placeholder="Location"></textarea>
 		<div class="ol"> <input type="checkbox" id="nearbyarea"><label for="nearbyarea">Show nearby areas (not implemented)</label></div>
 		<div class="ol"><input type="checkbox" id="nearyou"><label for="nearyou">Limit to tweeters near you</label></div>
