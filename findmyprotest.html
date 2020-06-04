@@ -5,9 +5,11 @@
 		.ol {
 			display: block;
 		}
-		
 		body {
 			background-color: #dfaee6;
+		}
+		textarea {
+			resize: none;
 		}
 	</style>
 	<script>
@@ -21,7 +23,7 @@
 			if (document.getElementById("nearyou").checked){
 				twitter+="lf=on&";
 			}
-			let query = "q="+ document.getElementById("city").value+" (";
+			let query = "q="+ listLocations()+" (";
 			if (document.getElementById("BLMT").checked){
 				query+=blmt;
 				hasprev = true;
@@ -49,17 +51,39 @@
 			}
 			window.location = twitter+query+")";
 		}
+		function newLocation() {
+			let div = document.getElementById("cities");
+			let input = document.createElement("textarea");
+			input.name = "city";
+			input.rows = "1";
+			input.cols = "50";
+			input.placeholder = "Location (city)";
+			div.appendChild(input);
+		}
+		function listLocations() {
+			let cities = []
+			let elements = document.getElementsByName("city");
+			for(let elm of elements.values()){
+				let c = elm.value
+				if( c !== "") {
+					cities.push(c)
+				}
+			}
+			return "(" + cities.join(" OR ") + ")"
+		}
 	</script>
 	</head>
 	<body>
 		<p>This will search twitter with the types of keywords you check to help you find the protests in your city</p>
-		<textarea id="city" rows="1" style="resize:none" cols="50" placeholder="Location"></textarea>
-		<div class="ol"> <input type="checkbox" id="nearbyarea"><label for="nearbyarea">Show nearby areas (not implemented)</label></div>
+		<div id="cities"><textarea name="city" rows="1" cols="50" placeholder="Location (city)"></textarea></div>
+		<div class="ol"><button onclick="newLocation()">Add another location</button></div>
+		<div class="ol"><input type="checkbox" id="nearbyarea"><label for="nearbyarea">Show nearby areas (not implemented)</label></div>
 		<div class="ol"><input type="checkbox" id="nearyou"><label for="nearyou">Limit to tweeters near you</label></div>
 		<div class="ol"><input type="checkbox" id="BLMT"><label for="vehicle1">Black Lives Matter terms</label></div>
 		<div class="ol"><input type="checkbox" id="PT"><label for="vehicle1">Protest terms</label></div>
 		<div class="ol"><input type="checkbox" id="RT"><label for="vehicle1">Riot terms</label></div>
 		<div class="ol"><input type="checkbox" id="LEOT"><label for="vehicle1">Law Enforcement terms</label></div>
-		<button onclick="directToTwitter()">Find My Protest</button>
+		<div class="ol"><button onclick="directToTwitter()">Find My Protest</button></div>
+		<a href="https://forms.gle/1dgCaQmyeRqUQ36R9">Send Feedback</a>
 	</body>
 </html>
