@@ -78,35 +78,64 @@
 	</head>
 
 	<body>
-		<p>This will search twitter with the types of keywords you check to help you find the protests in your city</p>
-		<div id="cities">
-			<textarea name="city" rows="1" cols="50" placeholder="Location (city)"></textarea>
+		<div>
+			<p>This will search twitter with the types of keywords you check to help you find the protests in your city</p>
+			<div id="cities">
+				<textarea name="city" rows="1" cols="50" placeholder="Location (city)"></textarea>
+			</div>
+			<div class="ol">
+				<button onclick="newLocation()">Add another location</button>
+			</div>
+			<div class="ol"><input type="checkbox" id="nearbyarea">
+				<label for="nearbyarea">Show nearby areas (not implemented)</label>
+			</div>
+			<div class="ol"><input type="checkbox" id="nearyou">
+				<label for="nearyou">Limit to tweeters near you</label>
+			</div>
+			<div class="ol"><input type="checkbox" id="BLMT">
+				<label for="vehicle1">Black Lives Matter terms</label>
+			</div>
+			<div class="ol"><input type="checkbox" id="PT">
+				<label for="vehicle1">Protest terms</label>
+			</div>
+			<div class="ol"><input type="checkbox" id="RT">
+				<label for="vehicle1">Riot terms</label>
+			</div>
+			<div class="ol"><input type="checkbox" id="LEOT">
+				<label for="vehicle1">Law Enforcement terms</label>
+			</div>
+			<div class="ol">
+				<button onclick="directToTwitter()">Find My Protest</button>
+			</div>
 		</div>
-		<div class="ol">
-			<button onclick="newLocation()">Add another location</button>
+		<div>
+			<h2>Resources</h2>
+			<p>
+				<a href="https://en.wikipedia.org/wiki/Tactics_and_methods_surrounding_the_2019%E2%80%9320_Hong_Kong_protests">Tactics and methods surrounding the 2019–20 Hong Kong protests</a>
+			</p>
+			<p>
+				<a href="https://www.bloomberg.com/graphics/2019-hong-kong-protesters-umbrellas/">The Essential Tool for Hong Kong Protesters? An Umbrella</a>
+			</p>
+			<p>
+				<a href="https://hongkongfp.com/2019/08/09/explainer-frontline-protesters-toolkit-evolved-hong-kongs-long-summer-dissent/">Explainer: How frontline protesters’ toolkit has evolved over Hong Kong’s long summer of dissent</a>
+			</p>
+			<p>
+				<a href="https://www.wired.com/story/how-to-protest-safely-surveillance-digital-privacy/">How to Protest Safely in the Age of Surveillance</a>
+			</p>
+			<p>
+				<a href="https://www.vice.com/en_us/article/4xam3b/what-to-bring-to-a-protest-guide">What to Bring to a Peaceful Protest</a>
+			</p>
+			<p>
+				<a href="https://twitter.com/EmilyGorcenski/status/1266118486188793860">Thread by Emily Gorcenski on riot control chemicals in the US. Read the replies too.</a>
+			</p>
+
 		</div>
-		<div class="ol"><input type="checkbox" id="nearbyarea">
-			<label for="nearbyarea">Show nearby areas (not implemented)</label>
+		<div>
+			<h2>Feedback</h2>
+			<p>
+				<a href="https://forms.gle/1dgCaQmyeRqUQ36R9">Send Feedback</a>
+			</p>
 		</div>
-		<div class="ol"><input type="checkbox" id="nearyou">
-			<label for="nearyou">Limit to tweeters near you</label>
-		</div>
-		<div class="ol"><input type="checkbox" id="BLMT">
-			<label for="vehicle1">Black Lives Matter terms</label>
-		</div>
-		<div class="ol"><input type="checkbox" id="PT">
-			<label for="vehicle1">Protest terms</label>
-		</div>
-		<div class="ol"><input type="checkbox" id="RT">
-			<label for="vehicle1">Riot terms</label>
-		</div>
-		<div class="ol"><input type="checkbox" id="LEOT">
-			<label for="vehicle1">Law Enforcement terms</label>
-		</div>
-		<div class="ol">
-			<button onclick="directToTwitter()">Find My Protest</button>
-		</div>
-		<a href="https://forms.gle/1dgCaQmyeRqUQ36R9">Send Feedback</a>
 	</body>
 
 </html>
