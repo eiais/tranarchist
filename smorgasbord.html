@@ -1,0 +1,95 @@
+
+<html>
+	<head>
+		<style>
+		body {
+			background-color: #dfaee6;
+		}
+		</style>
+	</head>
+	<body>
+		<h1>relationship anarchy smorgasbord </h1>
+		<p> 
+		to form your relationships you and another can pick any number of "items" from any number of platters.
+		take a huge helping or just a small scoop. the dish the two(or more) of you hold is your relationship.
+		remember you must agree together on what goes in it! No sneaking items in without the other knowing
+		or there will likely be conflict or disappointment later. Also it's your dish so if you decide to
+		change what you want from the smorgasbord later, that's cool.
+		</p>
+		<h3> Click the titles to cycle (green, yellow, red) or add comments in the text boxes</h3>
+		<button onclick="export_wants()">export</button>
+		<code id="export" style="word-break:break-word;"></code>
+		<button onclick="import_wants()">import</button>
+		<div id="boxes">
+		</div>
+	</body>
+	<script>
+		const colors = ["rgb(124, 252, 134)", "rgb(250, 252, 129)", "rgb(255, 94, 94)", ""]
+		const boxen = ["Romantic", "Friendship", "Domestic", "Sexual", "Physical touch", "Life partner", "Caregiver",
+						"Co-Caregivers", "Emotional intimacy", "Emotional support", "Social partners", "Financial", 
+						"Kink", "Power dynamic", "Collaborative partners", "Business partners"]
+		const examples = [
+							 "Chemical reaction, Feelings of love"
+							,"Companionship, Playfulness, Shared activity/interest"
+							,"Sharing a dwelling/home"
+							,"involving genitals anus, or orgasms?"
+							,"Dance, Body contact, Cuddles, Hugs, Pets, Hand holding, Massage"
+							,"Sharing goals (long term or life)"
+							,"Giving care to, Receiving care from"
+							,"Children, Animals, PLants, Family"
+							,"Sharing & Bring Vulnerable"
+							,"Listening, Being asked for advice Confidant"
+							,"Seen together: Events Friends, Family, Work, Social Media"
+							,"Sharing: Money, Accounts, Payment responsibilities, ptoperty"
+							,"Any of your favorites"
+							,"Boss/Employee, Teacher/student, age/pet/DS play"
+							,"Teaching Projects, Art, Organizing"
+							,"A miz of Collaborative, Financial & Social"
+						]
+		const green = 0
+		const yellow = 1
+		const red = 2;
+		const white = 3;
+				
+		function make_boxes() {
+			let out = ""
+			for (let i = 0; i < 16; i++) {
+				out += "<div><h2 onclick=\"next_color(this)\">" + boxen[i] + "</h2><textarea placeholder=\"" +examples[i] + "\"></textarea></div>"
+			}
+			document.getElementById("boxes").innerHTML = out;
+		}make_boxes();
+		
+		function next_color(element){
+			let tb = element.parentElement.lastElementChild.style;
+			const cur = (colors.indexOf(tb.backgroundColor) + 1) %4;
+			tb.backgroundColor = colors[cur];	
+		}
+		
+		function export_wants() {
+			let out = {}
+			const boxes = document.querySelectorAll('#boxes>div')
+			for(let i =0; i <16; i++) {
+				const box = boxes[i]
+				const color = colors.indexOf(box.lastElementChild.style.backgroundColor);
+				const text = box.lastElementChild.value
+				if(color == white && text == "") {
+					continue;
+				}
+				out[box.firstElementChild.innerText] = [color, text]					
+			}
+			document.getElementById("export").innerText = btoa(JSON.stringify(out));
+			
+		}
+		
+		function import_wants(){
+			const wants = JSON.parse(atob(prompt("smorgasbord code:")));
+			const boxes = document.querySelectorAll('#boxes>div')
+			const changes = Object.keys(wants)
+			for(i = 0; i < changes.length; i++) {
+				cur = boxes[boxen.indexOf(changes[i])].lastElementChild
+				cur.style.backgroundColor = colors[wants[changes[i]][0]]
+				cur.value = wants[changes[i]][1]
+			}
+		}
+	</script>
+</html>
