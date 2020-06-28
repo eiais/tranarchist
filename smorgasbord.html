@@ -53,7 +53,7 @@
 		function make_boxes() {
 			let out = ""
 			for (let i = 0; i < 16; i++) {
-				out += "<div><h2 onclick=\"next_color(this)\">" + boxen[i] + "</h2><textarea placeholder=\"" +examples[i] + "\"></textarea></div>"
+				out += "<div><h2 onclick=\"next_color(this)\">" + boxen[i] + "</h2><textarea rows=4 cols=80 placeholder=\"" +examples[i] + "\"></textarea></div>"
 			}
 			document.getElementById("boxes").innerHTML = out;
 		}make_boxes();
