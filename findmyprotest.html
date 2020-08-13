@@ -1,89 +1,146 @@
+<!-- This is the main view of FindMyProtest. Currently it searches Twitter for assorted relevant terms. -->
+
 <html>
+
 	<head>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<style>
-		.ol {
-			display: block;
-		}
-		body {
-			background-color: #dfaee6;
-		}
-		textarea {
-			resize: none;
-		}
-	</style>
-	<script>
-		let blmt = "blm OR blacklivesmatter";
-		let pt = "protest OR protestors OR protesting"; 
-		let rt = "riot OR rioters OR rioting";
-		let leot = "cop OR police OR law enforcement";
-		let twitter = "https://twitter.com/search?f=live&";
-		let hasprev = false;
-		function directToTwitter() {
-			if (document.getElementById("nearyou").checked){
-				twitter+="lf=on&";
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<style>
+			.ol {
+				display: block;
 			}
-			let query = "q="+ listLocations()+" (";
-			if (document.getElementById("BLMT").checked){
-				query+=blmt;
-				hasprev = true;
+			body {
+				background-color: #dfaee6;
 			}
-			if (document.getElementById("PT").checked){
-				if(hasprev){
-				query+=" OR ";
+			textarea {
+				resize: none;
+			}
+		</style>
+		<script>
+			let blmt = "blm OR blacklivesmatter";
+			let pt = "protest OR protestors OR protesting";
+			let rt = "riot OR rioters OR rioting";
+			let leot = "cop OR police OR law enforcement";
+			let twitter = "https://twitter.com/search?f=live&";
+			let hasprev = false;
+			function directToTwitter() {
+				if (document.getElementById("nearyou").checked) {
+					twitter += "lf=on&";
 				}
-				query+=pt;
-				hasprev = true;
-			}
-			if (document.getElementById("RT").checked){
-				if(hasprev){
-				query+=" OR ";
+				let query = "q=" + listLocations() + " (";
+				if (document.getElementById("BLMT").checked) {
+					query += blmt;
+					hasprev = true;
 				}
-				query+=rt;
-				hasprev = true;
-			}
-			if (document.getElementById("LEOT").checked){
-				if(hasprev){
-				query+=" OR ";
+				if (document.getElementById("PT").checked) {
+					if (hasprev) {
+						query += " OR ";
+					}
+					query += pt;
+					hasprev = true;
 				}
-				query+=leot;
-				hasprev = true;
-			}
-			window.location = twitter+query+")";
-		}
-		function newLocation() {
-			let div = document.getElementById("cities");
-			let input = document.createElement("textarea");
-			input.name = "city";
-			input.rows = "1";
-			input.cols = "50";
-			input.placeholder = "Location (city)";
-			div.appendChild(input);
-		}
-		function listLocations() {
-			let cities = []
-			let elements = document.getElementsByName("city");
-			for(let elm of elements.values()){
-				let c = elm.value
-				if( c !== "") {
-					cities.push(c)
+				if (document.getElementById("RT").checked) {
+					if (hasprev) {
+						query += " OR ";
+					}
+					query += rt;
+					hasprev = true;
 				}
+				if (document.getElementById("LEOT").checked) {
+					if (hasprev) {
+						query += " OR ";
+					}
+					query += leot;
+					hasprev = true;
+				}
+				window.location = twitter + query + ")";
 			}
-			return "(" + cities.join(" OR ") + ")"
-		}
-	</script>
+			function newLocation() {
+				let div = document.getElementById("cities");
+				let input = document.createElement("textarea");
+				input.name = "city";
+				input.rows = "1";
+				input.cols = "50";
+				input.placeholder = "Location (city)";
+				div.appendChild(input);
+			}
+			function listLocations() {
+				let cities = []
+				let elements = document.getElementsByName("city");
+				for (let elm of elements.values()) {
+					let c = elm.value
+					if (c !== "") {
+						cities.push(c)
+					}
+				}
+				return "(" + cities.join(" OR ") + ")"
+			}
+		</script>
 	</head>
+
 	<body>
-		<p>This will search twitter with the types of keywords you check to help you find the protests in your city</p>
-		<div id="cities"><textarea name="city" rows="1" cols="50" placeholder="Location (city)"></textarea></div>
-		<div class="ol"><button onclick="newLocation()">Add another location</button></div>
-		<div class="ol"><input type="checkbox" id="nearbyarea"><label for="nearbyarea">Show nearby areas (not implemented)</label></div>
-		<div class="ol"><input type="checkbox" id="nearyou"><label for="nearyou">Limit to tweeters near you</label></div>
-		<div class="ol"><input type="checkbox" id="BLMT"><label for="vehicle1">Black Lives Matter terms</label></div>
-		<div class="ol"><input type="checkbox" id="PT"><label for="vehicle1">Protest terms</label></div>
-		<div class="ol"><input type="checkbox" id="RT"><label for="vehicle1">Riot terms</label></div>
-		<div class="ol"><input type="checkbox" id="LEOT"><label for="vehicle1">Law Enforcement terms</label></div>
-		<div class="ol"><button onclick="directToTwitter()">Find My Protest</button></div>
-		<a href="https://forms.gle/1dgCaQmyeRqUQ36R9">Send Feedback</a>
+		<div>
+			<h2>Find My Protest</h2>
+			<p>This will search twitter with the types of keywords you check to help you find the protests in your city</p>
+			<div id="cities">
+				<textarea name="city" rows="1" cols="50" placeholder="Location (city)"></textarea>
+			</div>
+			<div class="ol">
+				<button onclick="newLocation()">Add another location</button>
+			</div>
+			<div class="ol"><input type="checkbox" id="nearbyarea">
+				<label for="nearbyarea">Show nearby areas (not implemented)</label>
+			</div>
+			<div class="ol"><input type="checkbox" id="nearyou">
+				<label for="nearyou">Limit to tweeters near you</label>
+			</div>
+			<div class="ol"><input type="checkbox" id="BLMT">
+				<label for="vehicle1">Black Lives Matter terms</label>
+			</div>
+			<div class="ol"><input type="checkbox" id="PT">
+				<label for="vehicle1">Protest terms</label>
+			</div>
+			<div class="ol"><input type="checkbox" id="RT">
+				<label for="vehicle1">Riot terms</label>
+			</div>
+			<div class="ol"><input type="checkbox" id="LEOT">
+				<label for="vehicle1">Law Enforcement terms</label>
+			</div>
+			<div class="ol">
+				<button onclick="directToTwitter()">Find My Protest</button>
+			</div>
+		</div>
+		<div>
+			<h2>Resources</h2>
+			<p>
+				<a href="https://www.nlg.org/chapters/">National Lawyers Guild</a>
+				(Find your local NLG number and memorize it, write it on your arm in permanent marker, etc.)
+			</p>
+			<p>
+				<a href="https://en.wikipedia.org/wiki/Tactics_and_methods_surrounding_the_2019%E2%80%9320_Hong_Kong_protests">Tactics and methods surrounding the 2019–20 Hong Kong protests</a>
+			</p>
+			<p>
+				<a href="https://web.archive.org/web/20190922142532/https://www.bloomberg.com/graphics/2019-hong-kong-protesters-umbrellas/">The Essential Tool for Hong Kong Protesters? An Umbrella</a>
+			</p>
+			<p>
+				<a href="https://hongkongfp.com/2019/08/09/explainer-frontline-protesters-toolkit-evolved-hong-kongs-long-summer-dissent/">Explainer: How frontline protesters’ toolkit has evolved over Hong Kong’s long summer of dissent</a>
+			</p>
+			<p>
+				<a href="https://www.wired.com/story/how-to-protest-safely-surveillance-digital-privacy/">How to Protest Safely in the Age of Surveillance</a>
+			</p>
+			<p>
+				<a href="https://www.vice.com/en_us/article/4xam3b/what-to-bring-to-a-protest-guide">What to Bring to a Peaceful Protest</a>
+			</p>
+			<p>
+				<a href="https://twitter.com/EmilyGorcenski/status/1266118486188793860">Thread by Emily Gorcenski on riot control chemicals in the US. Read the replies too.</a>
+			</p>
+
+		</div>
+		<div>
+			<h2>Feedback</h2>
+			<p>
+				<a href="https://forms.gle/1dgCaQmyeRqUQ36R9">Send Feedback</a>
+			</p>
+		</div>
 	</body>
+
 </html>
